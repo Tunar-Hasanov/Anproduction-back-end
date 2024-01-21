@@ -1,0 +1,26 @@
+// views/update-category
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Update</title>
+</head>
+<body>
+    <h1>Category Update</h1>
+    
+    <form action="/update/category/<%= category._id %>" method="POST" enctype="multipart/form-data">
+        <label for="name">Kategoriya Adı:</label>
+        <input type="text" name="name" value="<%= category.name %>" required>
+        
+        <label for="image">Image:</label>
+        <input type="file" name="image">
+        
+        <button type="submit">Update</button>
+    </form>
+
+    <form action="/delete/category/<%= category._id %>" method="POST">
+        <button type="submit">Sil</button>
+    </form>
+</body>
+</html>
