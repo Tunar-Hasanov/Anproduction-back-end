@@ -14,11 +14,14 @@ const productEdit = require('./routes/GET/product-edit');
 const productEditPut = require('./routes/PUT/productEditPut');
 const productDelete = require('./routes/DELETE/product-delete');
 const addCategory = require('./routes/POST/add-category');
+const orderPost = require('./routes/POST/order-post');
 const categoryRoute = require('./routes/GET/categoryUrl');
 const categoryUpdateGet = require('./routes/GET/category-edit');
 const categoryEditPut = require('./routes/PUT/categoryEditPut');
 const productAdd = require('./routes/GET/product-add');
 const categoryDelete = require('./routes/DELETE/category-delete');
+const orderDelete = require('./routes/DELETE/order-delete');
+const MarkRead = require('./routes/POST/read-order');
 const mongoose = require('mongoose');
 const app = express();
 
@@ -45,13 +48,15 @@ db.once('open', () => {
 
 // cors
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://anproduction.com/',
 }));
 // routes post
 app.use('/admin/login', adminLogin);
 app.use('/admin/register', adminRegister);
 app.use('/add-product', productRouter);
 app.use('/add-category', addCategory);
+app.use('/submit-order', orderPost);
+app.use('/', MarkRead);
 // routes get
 app.use('/', imagePath);
 app.use('/', productEdit);
@@ -64,6 +69,7 @@ app.use('/', categoryEditPut);
 // routes delete
 app.use('/', productDelete);
 app.use('/', categoryDelete);
+app.use('/', orderDelete);
 // LISTEN PORT
 app.set('port', process.env.PORT);
 
