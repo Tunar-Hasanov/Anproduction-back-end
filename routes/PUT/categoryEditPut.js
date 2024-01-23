@@ -13,7 +13,7 @@ categoryEditPost.post('/update/category/:id', uploadMiddleware.single('image'), 
 
         const existingCategory = await Category.findOne({ name });
         if (existingCategory && existingCategory._id.toString() !== categoryId) {
-            return res.status(400).json({ error: 'Bu isimde bir kategori zaten mevcut' });
+            return res.status(400).json({ error: 'Bu kategoriyada mal mövcuddur' });
         }
 
         const updatedCategory = {
@@ -24,7 +24,7 @@ categoryEditPost.post('/update/category/:id', uploadMiddleware.single('image'), 
         const result = await Category.findByIdAndUpdate(categoryId, updatedCategory, { new: true });
 
         if (!result) {
-            return res.status(404).json({ error: 'Kategori bulunamadı' });
+            return res.status(404).json({ error: 'Kategoriya tapılmadı' });
         }
 
         res.redirect(`/update/category/${categoryId}`);
